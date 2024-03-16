@@ -26,6 +26,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
+  -- Activity Watch plugin to monitor my activity
+  'ActivityWatch/aw-watcher-vim',
+
   'tpope/vim-sleuth',
 
   {
