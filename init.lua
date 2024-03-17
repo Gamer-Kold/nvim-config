@@ -9,6 +9,7 @@ vim.o.relativenumber = true
 -- TODO List
 -- [ ] Figure out what incremental selection is.
 -- [ ] Figure out what the fuck a loclist or a quickfix list is.
+-- [ ] Add telescope keybindings
 -- [ ] Add multicursor support
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -55,6 +56,17 @@ require('lazy').setup({
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
     end,
+  },
+
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make',
+    dependencies = { 'nvim-telescope/telescope.nvim' }
   },
 
   {
@@ -110,12 +122,7 @@ vim.o.termguicolors = true
 local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup {}
 lspconfig.tsserver.setup {}
-lspconfig.rust_analyzer.setup {
-  -- Server-specific settings. See `:help lspconfig-setup`
-  settings = {
-    ['rust-analyzer'] = {},
-  },
-}
+lspconfig.rust_analyzer.setup {}
 
 
 -- Global mappings.
@@ -145,6 +152,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, opts("Type definition"))
     vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, opts("Rename"))
     vim.keymap.set({ 'n', 'v' }, '<leader>ll', vim.lsp.buf.code_action, opts("Code Action"))
+
     vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format { async = true }
     end, opts("Format buffer"))
@@ -157,8 +165,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Moving lines
+-- Normal Mode
+vim.keymap.set('n', '<a-k>', ":m .-2<CR>==")
+vim.keymap.set('n', '<a-j>', ":m .+1<CR>==")
+-- Visual Mode
+vim.keymap.set('v', '<a-k>', ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', '<a-j>', ":m '>+1<CR>gv=gv")
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
