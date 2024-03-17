@@ -5,6 +5,7 @@ vim.g.maplocalleader = ' '
 
 -- Enable relative line numbers
 vim.o.relativenumber = true
+vim.o.number = true
 
 -- TODO List
 -- [ ] Figure out what incremental selection is.
@@ -60,15 +61,32 @@ require('lazy').setup({
 
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', },
+    },
+    config = function()
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, {desc = "Find Files"      })
+      vim.keymap.set('n', '<leader>sg', builtin.live_grep,  {desc = "Live Grep"       })
+      vim.keymap.set('n', '<leader>sb', builtin.buffers,    {desc = "Search buffers"  })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags,  {desc = "Search help"     })
+      vim.keymap.set('n', '<leader>sm', builtin.man_pages,  {desc = "Search man pages"})
+    end
   },
-
   {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'make',
-    dependencies = { 'nvim-telescope/telescope.nvim' }
+    "smoka7/multicursors.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      'smoka7/hydra.nvim',
+    },
+    opts = {},
+    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
+    config = function()
+      vim.keymap.set('n', '<leader>m', ":MCstart", { desc = "Start multicursor"})
+    end
   },
-
+  "andweeb/presence.nvim",
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
@@ -76,11 +94,11 @@ require('lazy').setup({
       require('which-key').setup()
 
       require('which-key').register {
-        ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
-        ['<leader>g'] = { name = 'Go To', _ = 'which_key_ignore' },
+        ['<leader>s'] = { name = 'Search', _      = 'which_key_ignore' },
+        ['<leader>g'] = { name = 'Go To', _       = 'which_key_ignore' },
         ['<leader>d'] = { name = 'Diagnostics', _ = 'which_key_ignore' },
-        ['<leader>l'] = { name = 'LSP', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = 'Workspaces', _ = 'which_key_ignore' },
+        ['<leader>l'] = { name = 'LSP', _         = 'which_key_ignore' },
+        ['<leader>w'] = { name = 'Workspaces', _  = 'which_key_ignore' },
       }
     end,
   },
