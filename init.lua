@@ -10,8 +10,8 @@ vim.o.number = true
 -- TODO List
 -- [ ] Figure out what incremental selection is.
 -- [ ] Figure out what the fuck a loclist or a quickfix list is.
--- [ ] Add telescope keybindings
--- [ ] Add multicursor support
+-- [ ] Add multicursor keybindings
+-- [ ] Add autocompletion
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -67,13 +67,14 @@ require('lazy').setup({
     },
     config = function()
       local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, {desc = "Find Files"      })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep,  {desc = "Live Grep"       })
-      vim.keymap.set('n', '<leader>sb', builtin.buffers,    {desc = "Search buffers"  })
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags,  {desc = "Search help"     })
-      vim.keymap.set('n', '<leader>sm', builtin.man_pages,  {desc = "Search man pages"})
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, {desc = "Find Files"       })
+      vim.keymap.set('n', '<leader>sg', builtin.live_grep,  {desc = "Live Grep"        })
+      vim.keymap.set('n', '<leader>sb', builtin.buffers,    {desc = "Search buffers"   })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags,  {desc = "Search help"      })
+      vim.keymap.set('n', '<leader>sm', builtin.man_pages,  {desc = "Search man pages" })
     end
   },
+
   {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
@@ -83,10 +84,13 @@ require('lazy').setup({
     opts = {},
     cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
     config = function()
-      vim.keymap.set('n', '<leader>m', ":MCstart", { desc = "Start multicursor"})
+      require("multicursors").setup({})
+      vim.keymap.set('n', '<leader>m', ":MCunderCursor<CR>", { desc = "Start multicursor"})
     end
   },
+
   "andweeb/presence.nvim",
+
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
