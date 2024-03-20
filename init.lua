@@ -67,26 +67,32 @@ require('lazy').setup({
     },
     config = function()
       local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, {desc = "Find Files"       })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep,  {desc = "Live Grep"        })
-      vim.keymap.set('n', '<leader>sb', builtin.buffers,    {desc = "Search buffers"   })
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags,  {desc = "Search help"      })
-      vim.keymap.set('n', '<leader>sm', builtin.man_pages,  {desc = "Search man pages" })
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = "Find Files" })
+      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = "Live Grep" })
+      vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = "Search buffers" })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = "Search help" })
+      vim.keymap.set('n', '<leader>sm', builtin.man_pages, { desc = "Search man pages" })
     end
   },
 
   {
-    "smoka7/multicursors.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      'smoka7/hydra.nvim',
-    },
-    opts = {},
-    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
-    config = function()
-      require("multicursors").setup({})
-      vim.keymap.set('n', '<leader>m', ":MCunderCursor<CR>", { desc = "Start multicursor"})
+    "mg979/vim-visual-multi",
+    init = function ()
+      vim.g.VM_maps={
+        ['Find Under'] = "\\\\<C-n>",
+        ['Find Subword Under'] = "\\\\<C-n>",
+      }
     end
+  },
+
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    config = true
   },
 
   "andweeb/presence.nvim",
@@ -98,11 +104,11 @@ require('lazy').setup({
       require('which-key').setup()
 
       require('which-key').register {
-        ['<leader>s'] = { name = 'Search', _      = 'which_key_ignore' },
-        ['<leader>g'] = { name = 'Go To', _       = 'which_key_ignore' },
+        ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = 'Go To', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = 'Diagnostics', _ = 'which_key_ignore' },
-        ['<leader>l'] = { name = 'LSP', _         = 'which_key_ignore' },
-        ['<leader>w'] = { name = 'Workspaces', _  = 'which_key_ignore' },
+        ['<leader>l'] = { name = 'LSP', _ = 'which_key_ignore' },
+        ['<leader>w'] = { name = 'Workspaces', _ = 'which_key_ignore' },
       }
     end,
   },
