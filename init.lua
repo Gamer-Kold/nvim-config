@@ -102,7 +102,7 @@ require('lazy').setup({
     "mfussenegger/nvim-jdtls",
   },
 
-  "andweeb/presence.nvim",
+  -- "andweeb/presence.nvim",
 
   {
     'folke/which-key.nvim',
