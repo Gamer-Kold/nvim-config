@@ -102,7 +102,7 @@ require('lazy').setup({
     "mfussenegger/nvim-jdtls",
   },
 
-  -- "andweeb/presence.nvim",
+   "andweeb/presence.nvim",
 
   {
     'folke/which-key.nvim',
@@ -234,6 +234,7 @@ local lsp_conf = {
 }
 local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup       (lsp_conf)
+lspconfig.zls.setup          (lsp_conf)
 lspconfig.tsserver.setup     (lsp_conf)
 lspconfig.rust_analyzer.setup(lsp_conf)
 
