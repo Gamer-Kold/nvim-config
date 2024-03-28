@@ -237,6 +237,7 @@ lspconfig.lua_ls.setup       (lsp_conf)
 lspconfig.zls.setup          (lsp_conf)
 lspconfig.tsserver.setup     (lsp_conf)
 lspconfig.rust_analyzer.setup(lsp_conf)
+lspconfig.ols.setup          (lsp_conf)
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
