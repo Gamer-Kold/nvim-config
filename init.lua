@@ -121,6 +121,7 @@ require('lazy').setup({
   },
   {
     'hrsh7th/nvim-cmp',
+    event = "VimEnter",
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
@@ -234,6 +235,7 @@ local lsp_conf = {
 }
 local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup       (lsp_conf)
+lspconfig.pyright.setup      (lsp_conf)
 lspconfig.zls.setup          (lsp_conf)
 lspconfig.tsserver.setup     (lsp_conf)
 lspconfig.rust_analyzer.setup(lsp_conf)
