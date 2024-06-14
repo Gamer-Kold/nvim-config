@@ -9,7 +9,8 @@ vim.o.number = true
 
 -- TODO List
 -- [ ] Figure out what incremental selection is.
--- [ ] Figure out what the fuck a loclist or a quickfix list is.
+-- [x] Figure out what the fuck a loclist or a quickfix list is.
+  -- [ ] Figure out if I need to start Makefiles to all my projects
 -- [ ] Add multicursor keybindings
 -- [ ] Add autocompletion
 
@@ -29,7 +30,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 
   -- Activity Watch plugin to monitor my activity
-  'ActivityWatch/aw-watcher-vim',
+  -- 'ActivityWatch/aw-watcher-vim',
 
   'tpope/vim-sleuth',
 
@@ -193,8 +194,6 @@ require('lazy').setup({
 
 
 
--- Set up lspconfig.
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 
 vim.cmd.colorscheme "zenbones"
 
@@ -227,19 +226,16 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
--- The line beneath this is called `modeline`. See `:help modeline`
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp_conf = {
   capabilities = capabilities
 }
 local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup       (lsp_conf)
-lspconfig.pyright.setup      (lsp_conf)
-lspconfig.zls.setup          (lsp_conf)
-lspconfig.tsserver.setup     (lsp_conf)
-lspconfig.rust_analyzer.setup(lsp_conf)
-lspconfig.ols.setup          (lsp_conf)
+lspconfig.lua_ls.setup        (lsp_conf)
+lspconfig.zls.setup           (lsp_conf)
+lspconfig.rust_analyzer.setup (lsp_conf)
+lspconfig.ols.setup           (lsp_conf)
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
