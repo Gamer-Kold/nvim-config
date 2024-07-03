@@ -2,6 +2,7 @@
 ---@diagnostic disable: undefined-global
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.o.foldmethod = "marker"
 
 -- Enable relative line numbers
 vim.o.relativenumber = true
@@ -31,6 +32,12 @@ require('lazy').setup({
 
   -- Activity Watch plugin to monitor my activity
   -- 'ActivityWatch/aw-watcher-vim',
+  {
+    "Gamer-Kold/kodnotes.nvim",
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+    }
+  },
 
   'tpope/vim-sleuth',
 
@@ -66,7 +73,7 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', },
     },
-    config = function()
+    init = function()
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = "Find Files" })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = "Live Grep" })
@@ -103,7 +110,21 @@ require('lazy').setup({
     "mfussenegger/nvim-jdtls",
   },
 
-   "andweeb/presence.nvim",
+  "andweeb/presence.nvim",
+  {
+    "Olical/conjure",
+    config = function ()
+      vim.g["conjure#mapping#prefix"] = "<localleader>c"
+      vim.g["conjure#filetype#fennel"] = "conjure.client.fennel.stdio"
+    end
+  },
+  {
+    "eraserhd/parinfer-rust",
+    build = "cargo build --release",
+    config = function ()
+      vim.cmd("ParinferOff")
+    end,
+  },
 
   {
     'folke/which-key.nvim',
@@ -236,8 +257,9 @@ lspconfig.lua_ls.setup        (lsp_conf)
 lspconfig.zls.setup           (lsp_conf)
 lspconfig.rust_analyzer.setup (lsp_conf)
 lspconfig.ols.setup           (lsp_conf)
+lspconfig.fennel_ls.setup     (lsp_conf)
 
--- Global mappings.
+-- Global mappings
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = "Open diagnostics" })
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
