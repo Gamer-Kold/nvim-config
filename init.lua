@@ -3,6 +3,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.o.foldmethod = "marker"
+vim.o.tabstop = 4
 
 -- Enable relative line numbers
 vim.o.relativenumber = true
@@ -12,7 +13,7 @@ vim.o.number = true
 -- [ ] Figure out what incremental selection is.
 -- [x] Figure out what the fuck a loclist or a quickfix list is.
   -- [ ] Figure out if I need to start Makefiles to all my projects
--- [ ] Add multicursor keybindings
+-- [x] Add multicursor keybindings
 -- [ ] Add autocompletion
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -95,6 +96,7 @@ require('lazy').setup({
 
   {
     "NeogitOrg/neogit",
+    tag="0.0.1",
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
       "sindrets/diffview.nvim",        -- optional - Diff integration
@@ -113,6 +115,7 @@ require('lazy').setup({
   "andweeb/presence.nvim",
   {
     "Olical/conjure",
+    ft={"scheme"},
     config = function ()
       vim.g["conjure#mapping#prefix"] = "<localleader>c"
       vim.g["conjure#filetype#fennel"] = "conjure.client.fennel.stdio"
@@ -140,6 +143,32 @@ require('lazy').setup({
         ['<leader>w'] = { name = 'Workspaces', _ = 'which_key_ignore' },
       }
     end,
+  },
+  {
+    'mfussenegger/nvim-dap',
+    config = function()
+      local dap = require('dap')
+      vim.keymap.set('n', '<F5>', function() dap.continue() end)
+      vim.keymap.set('n', '<F10>', function() dap.step_over() end)
+      vim.keymap.set('n', '<F11>', function() dap.step_into() end)
+      vim.keymap.set('n', '<F12>', function() dap.step_out() end)
+      vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end)
+      dap.adapters.godot = {
+        type = "server",
+        host = '127.0.0.1',
+        port = 6006,
+      }
+
+      dap.configurations.gdscript = {
+        {
+          type = "godot",
+          request = "launch",
+          name = "Launch scene",
+          project = "${workspaceFolder}",
+          launch_scene = true,
+        }
+      }
+    end
   },
   {
     'hrsh7th/nvim-cmp',
@@ -258,6 +287,7 @@ lspconfig.zls.setup           (lsp_conf)
 lspconfig.rust_analyzer.setup (lsp_conf)
 lspconfig.ols.setup           (lsp_conf)
 lspconfig.fennel_ls.setup     (lsp_conf)
+lspconfig.gdscript.setup     (lsp_conf)
 
 -- Global mappings
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
