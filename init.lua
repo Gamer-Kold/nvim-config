@@ -47,6 +47,8 @@ require('lazy').setup({
     dependencies = { "rktjmp/lush.nvim" },
   },
 
+  "rebelot/kanagawa.nvim",
+
   "neovim/nvim-lspconfig",
 
   {
@@ -94,19 +96,19 @@ require('lazy').setup({
     end
   },
 
-  {
-    "NeogitOrg/neogit",
-    tag="0.0.1",
-    dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - Diff integration
-      "nvim-telescope/telescope.nvim", -- optional
-    },
-    config = function()
-      require('neogit').setup()
-      vim.keymap.set('n', '<leader>g', ':Neogit<CR>', { desc = "Open git" })
-    end
-  },
+--  {
+--    "NeogitOrg/neogit",
+--    tag="0.0.1",
+--    dependencies = {
+--      "nvim-lua/plenary.nvim",         -- required
+--      "sindrets/diffview.nvim",        -- optional - Diff integration
+--      "nvim-telescope/telescope.nvim", -- optional
+--    },
+--    config = function()
+--      require('neogit').setup()
+--      vim.keymap.set('n', '<leader>g', ':Neogit<CR>', { desc = "Open git" })
+--    end
+--  },
 
   {
     "mfussenegger/nvim-jdtls",
@@ -245,7 +247,7 @@ require('lazy').setup({
 
 
 
-vim.cmd.colorscheme "zenbones"
+vim.cmd.colorscheme "kanagawa-dragon"
 
 -- Set highlight on search
 vim.o.hlsearch = false
