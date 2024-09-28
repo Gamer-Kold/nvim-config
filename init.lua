@@ -307,6 +307,10 @@ vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = "Open diag
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 vim.keymap.set('n', '<leader>dm', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 
+vim.keymap.set({'c'}, '<M-n>', '<C-n>', {remap = true})
+vim.keymap.set({'c'}, '<M-m>', '<C-p>', {remap = true})
+vim.keymap.set('i', '<M-o>', '<esc>')
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
