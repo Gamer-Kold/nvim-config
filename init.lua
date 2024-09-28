@@ -9,6 +9,8 @@ vim.o.tabstop = 4
 vim.o.relativenumber = true
 vim.o.number = true
 
+vim.o.scrolloff = 30
+
 -- TODO List
 -- [ ] Figure out what incremental selection is.
 -- [x] Figure out what the fuck a loclist or a quickfix list is.
