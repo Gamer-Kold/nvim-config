@@ -39,6 +39,9 @@ require('lazy').setup({
       'nvim-telescope/telescope.nvim',
     }
   },
+  {
+    dir = "~/projects/hblang.vim/",
+  },
 
   'tpope/vim-sleuth',
 
@@ -289,7 +292,7 @@ lspconfig.zls.setup           (lsp_conf)
 lspconfig.rust_analyzer.setup (lsp_conf)
 lspconfig.ols.setup           (lsp_conf)
 lspconfig.fennel_ls.setup     (lsp_conf)
-lspconfig.gdscript.setup     (lsp_conf)
+lspconfig.gdscript.setup      (lsp_conf)
 
 -- Global mappings
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
