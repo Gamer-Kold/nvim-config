@@ -14,7 +14,6 @@ vim.o.number = true
 -- [x] Figure out what the fuck a loclist or a quickfix list is.
   -- [ ] Figure out if I need to start Makefiles to all my projects
 -- [x] Add multicursor keybindings
--- [ ] Add autocompletion
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -210,6 +209,7 @@ require('lazy').setup({
           ['<M-c>'] = cmp.mapping.complete(), 
           ['<M-e>'] = cmp.mapping.abort(),
           ['<M-m>'] = cmp.mapping.select_prev_item(),
+          ['<M-n>'] = cmp.mapping.select_next_item(),
           ['<M-y>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
