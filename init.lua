@@ -206,13 +206,12 @@ require('lazy').setup({
 
         },
         mapping = cmp.mapping.preset.insert({
-          ['<M-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<M-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<M-c>'] = cmp.mapping.complete(), 
-          ['<M-e>'] = cmp.mapping.abort(),
-          ['<M-m>'] = cmp.mapping.select_prev_item(),
-          ['<M-n>'] = cmp.mapping.select_next_item(),
-          ['<M-y>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<C-y>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
@@ -307,8 +306,6 @@ vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = "Open diag
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 vim.keymap.set('n', '<leader>dm', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 
-vim.keymap.set({'c'}, '<M-n>', '<C-n>', {remap = true})
-vim.keymap.set({'c'}, '<M-m>', '<C-p>', {remap = true})
 vim.keymap.set('i', '<M-o>', '<esc>')
 
 vim.api.nvim_create_autocmd('LspAttach', {
