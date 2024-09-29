@@ -28,12 +28,30 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+
+local hotpot_path = vim.fn.stdpath("data") .. '/lazy/hotpot.nvim'
+if not vim.loop.fs_stat(hotpot_path) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/rktjmp/hotpot.nvim.git',
+    '--branch=v0.14.6', -- latest stable release
+    hotpot_path,
+  }
+end
+vim.opt.rtp:prepend(hotpot_path)
 vim.opt.rtp:prepend(lazypath)
+
+vim.loader.enable()
+
+require("hotpot")
 
 require('lazy').setup({
 
   -- Activity Watch plugin to monitor my activity
   -- 'ActivityWatch/aw-watcher-vim',
+  "rktjmp/hotpot.nvim",
   {
     "Gamer-Kold/kodnotes.nvim",
     dependencies = {
@@ -131,7 +149,6 @@ require('lazy').setup({
     "eraserhd/parinfer-rust",
     build = "cargo build --release",
     config = function ()
-      vim.cmd("ParinferOff")
     end,
   },
 
