@@ -4,4 +4,9 @@
 (local lspconfig (require :lspconfig))
 (local lsp_conf {: capabilities})
 (local opts {:lsp_conf lsp_conf : lspconfig})
-((require :fennel) opts) 
+
+((require "langs.fennel") opts) 
+((require "langs.lua") opts) 
+((require "langs.rust") opts) 
+
+nil

@@ -3,11 +3,8 @@
 (local lsp_conf {: capabilities})
 
 (local lspconfig (require :lspconfig))
-(lspconfig.lua_ls.setup lsp_conf)
 (lspconfig.zls.setup lsp_conf)
-(lspconfig.rust_analyzer.setup lsp_conf)
 (lspconfig.ols.setup lsp_conf)
-(lspconfig.fennel_ls.setup lsp_conf)
 (lspconfig.gdscript.setup lsp_conf)
 
 ; Global mappings
