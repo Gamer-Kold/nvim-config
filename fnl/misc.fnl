@@ -22,7 +22,15 @@
 (let [fennel_group (vim.api.nvim_create_augroup :KodinFennel {:clear true})]
   (vim.api.nvim_create_autocmd :BufWritePost
                                {:callback (fn [opts]
-                                            (vim.cmd "%!fnlfmt -"))
+                                            (vim.cmd (.. "silent! !fnlfmt "
+                                                         opts.file))
+                                            (if (= vim.v.shell_error 0)
+                                                (do
+                                                  (vim.cmd "mark `")
+                                                  (vim.cmd "silent! %!fnlfmt -")
+                                                  (vim.cmd "call feedkeys('``')"))
+                                                (vim.cmd "echom 'error in file'"))
+                                            nil)
                                 :group fennel_group
                                 :pattern :*.fnl}))
 
