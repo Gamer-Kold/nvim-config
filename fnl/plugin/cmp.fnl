@@ -8,13 +8,13 @@
                 :saadparwaiz1/cmp_luasnip]
  :config (fn []
            (local cmp (require :cmp))
-           (cmp.setup {":completion" {:autocomplete false}
+           (cmp.setup {:completion {:autocomplete false}
                        :snippet {; REQUIRED - you must specify a snippet engine
                                  :expand (fn [args]
                                            (local luasnip (require :luasnip)) ; For `luasnip` users.
                                            (luasnip.lsp_expand args.body))}
                        :window {}
-                       ; completion = cmp.config.window.bordered()
+                       ;:completion (cmp.config.window.bordered)
                        ; documentation = cmp.config.window.bordered()
                        :mapping (cmp.mapping.preset.insert {:<C-b> (cmp.mapping.scroll_docs -4)
                                                             :<C-f> (cmp.mapping.scroll_docs 4)

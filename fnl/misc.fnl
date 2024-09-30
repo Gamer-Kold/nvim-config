@@ -25,10 +25,10 @@
                                             (vim.cmd (.. "silent! !fnlfmt "
                                                          opts.file))
                                             (if (= vim.v.shell_error 0)
-                                                (do
-                                                  (vim.cmd "mark `")
+                                                (let [pos (vim.api.nvim_win_get_cursor 0)]
                                                   (vim.cmd "silent! %!fnlfmt -")
-                                                  (vim.cmd "call feedkeys('``')"))
+                                                  (vim.api.nvim_win_set_cursor 0
+                                                                               pos))
                                                 (vim.cmd "echom 'error in file'"))
                                             nil)
                                 :group fennel_group
