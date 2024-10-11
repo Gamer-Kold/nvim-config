@@ -18,5 +18,7 @@
                                 :group highlight_group
                                 :pattern "*"}))
 
+; Disable inline diagnostics
+(vim.diagnostic.config {:virtual_text false})
 
 nil
