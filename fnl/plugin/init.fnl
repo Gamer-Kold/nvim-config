@@ -9,6 +9,8 @@
  {:dir "~/projects/hblang.vim/"}
  ; automatic detection of indent
  :tpope/vim-sleuth
+ ; git plugin 
+ :tpope/vim-fugitive
  ; colorscheme
  {1 :mcchrish/zenbones.nvim :dependencies [:rktjmp/lush.nvim]}
  ; also a colorscheme
