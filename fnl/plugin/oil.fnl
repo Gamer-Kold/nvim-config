@@ -4,6 +4,8 @@
                  :config (fn []
                            ((. (require :mini.icons) :setup) {:style :glyph}))}]
  :config (fn []
-           ((. (require :oil) :setup))
-           nil)}
+           (let [oil (require :oil)]
+             (oil.setup)
+             (vim.keymap.set :n :<leader>fo ":Oil<CR>")
+             (vim.keymap.set :n "<leader>fh" oil.toggle_hidden)))}
 
