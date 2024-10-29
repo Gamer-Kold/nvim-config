@@ -10,4 +10,4 @@ end
 local function _3_()
   return vim.cmd("ParinferOff")
 end
-return {"rktjmp/hotpot.nvim", {"Gamer-Kold/kodnotes.nvim", dependencies = {"nvim-telescope/telescope.nvim"}}, {dir = "~/projects/hblang.vim/"}, "tpope/vim-sleuth", "tpope/vim-fugitive", {"mcchrish/zenbones.nvim", dependencies = {"rktjmp/lush.nvim"}}, "rebelot/kanagawa.nvim", "neovim/nvim-lspconfig", {"mg979/vim-visual-multi", init = _1_}, {"mfussenegger/nvim-jdtls"}, "andweeb/presence.nvim", {"Olical/conjure", ft = {"scheme"}, config = _2_}, {"eraserhd/parinfer-rust", build = "cargo build ;release", config = _3_}}
+return {"rktjmp/hotpot.nvim", {"Gamer-Kold/kodnotes.nvim", dependencies = {"nvim-telescope/telescope.nvim"}}, {dir = "~/projects/hblang.vim/"}, "tpope/vim-sleuth", {"mcchrish/zenbones.nvim", dependencies = {"rktjmp/lush.nvim"}}, "rebelot/kanagawa.nvim", "neovim/nvim-lspconfig", {"mg979/vim-visual-multi", init = _1_}, {"mfussenegger/nvim-jdtls"}, "andweeb/presence.nvim", {"Olical/conjure", ft = {"scheme"}, config = _2_}, {"eraserhd/parinfer-rust", build = "cargo build ;release", config = _3_}}
