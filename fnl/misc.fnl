@@ -21,4 +21,10 @@
 ; Disable inline diagnostics
 (vim.diagnostic.config {:virtual_text false})
 
+; Dealing with tabs
+(vim.keymap.set :n :<a-t>n :<cmd>tabnew {:desc "Create a new tab"})
+(vim.keymap.set :n :<a-t>l :<cmd>tabnext {:desc "Go to next tab"})
+(vim.keymap.set :n :<a-t>h :<cmd>tabprev {:desc "Go to previous tab"})
+
 nil
+
