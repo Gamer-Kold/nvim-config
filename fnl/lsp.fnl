@@ -1,9 +1,14 @@
-(local capabilities (let [cmp_lsp (require :cmp_nvim_lsp)]
-                      (cmp_lsp.default_capabilities)))
+(local capabilities
+       (let [cmp_lsp (require :cmp_nvim_lsp)
+             cmp_capabilities (cmp_lsp.default_capabilities)
+             client_capabilities (vim.lsp.protocol.make_client_capabilities)]
+         (vim.tbl_deep_extend :force client_capabilities cmp_capabilities)))
+
 (local lsp_conf {: capabilities})
 
 (local lspconfig (require :lspconfig))
 (lspconfig.zls.setup lsp_conf)
+(lspconfig.rust_analyzer.setup lsp_conf)
 (lspconfig.ols.setup lsp_conf)
 (lspconfig.gdscript.setup lsp_conf)
 
@@ -11,21 +16,22 @@
 ; See `:help vim.diagnostic.*` for documentation on any of the below functions
 (vim.keymap.set :n :<leader>de vim.diagnostic.open_float
                 {:desc "Open diagnostics"})
+
 (vim.keymap.set :n :<leader>dn vim.diagnostic.goto_prev
                 {:desc "Go to previous diagnostic"})
+
 (vim.keymap.set :n :<leader>dm vim.diagnostic.goto_next
                 {:desc "Go to next diagnostic"})
+
+(vim.keymap.set :n :<leader>dq vim.diagnostic.setqflist
+                {:desc "Add diagnostic to Quick Fix list"})
 
 (vim.keymap.set :i :<M-o> :<esc>)
 
 (vim.api.nvim_create_autocmd :LspAttach
                              {:group (vim.api.nvim_create_augroup :UserLspConfig
                                                                   {})
-                              :callback (fn [ev] 
-
-                                          ; Enable completion triggered by <c-x><c-o>
-                                          (tset (. vim.bo ev.buf) :omnifunc
-                                                "v:lua.vim.lsp.omnifunc")
+                              :callback (fn [ev]
                                           (local opts
                                                  (fn [desc]
                                                    {:buffer ev.buf
@@ -55,10 +61,10 @@
                                           (vim.keymap.set :n :<leader>lr
                                                           vim.lsp.buf.rename
                                                           (opts :Rename))
-                                          (vim.keymap.set {:n :v} :<leader>ll
+                                          (vim.keymap.set [:n :v] :<leader>ll
                                                           vim.lsp.buf.code_action
                                                           (opts "Code Action"))
-                                          (vim.keymap.set :n :<leader>f
+                                          (vim.keymap.set :n :<leader>lf
                                                           (fn []
                                                             (vim.lsp.buf.format {:async true}))
                                                           (opts "Format buffer"))
@@ -73,3 +79,4 @@
                                                           (fn []
                                                             (print (vim.inspect (vim.lsp.buf.list_workspace_folders))))
                                                           (opts "List Workspace folders")))})
+

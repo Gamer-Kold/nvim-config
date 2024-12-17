@@ -6,7 +6,7 @@
  ; my notetaking system
  {1 :Gamer-Kold/kodnotes.nvim :dependencies [:nvim-telescope/telescope.nvim]}
  ; hblang syntax highligher
- {:dir "~/projects/hblang.vim/"}
+ {:url "https://git.ablecorp.us/kodin/hblang.vim"}
  ; automatic detection of indent
  :tpope/vim-sleuth
  ; colorscheme
@@ -34,3 +34,4 @@
  {1 :eraserhd/parinfer-rust
   :build "cargo build ;release"
   :config (fn [] (vim.cmd :ParinferOff))}]
+
